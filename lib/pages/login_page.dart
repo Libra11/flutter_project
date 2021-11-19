@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 12:40:02
- * @LastEditTime: 2021-11-19 10:15:41
+ * @LastEditTime: 2021-11-19 10:54:03
  * @LastEditors: Libra
  * @Description: 登录页面
  * @FilePath: /test_flutter/lib/pages/login_page.dart
@@ -14,6 +14,7 @@ import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/http/dao/validate_dao.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
+import 'package:test_flutter/util/toast.dart';
 import 'package:test_flutter/widget/common_button.dart';
 import 'package:test_flutter/widget/login_input.dart';
 
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       var res = await LoginDao.login(imageCode, key, loginName, loginPassword);
     } on HiNetError catch (e) {
       clear();
-      print(e.message);
+      ToastUtil.showToast(e.message);
     }
   }
 
