@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 12:40:02
- * @LastEditTime: 2021-11-22 14:51:04
+ * @LastEditTime: 2021-11-22 15:27:46
  * @LastEditors: Libra
  * @Description: 登录页面
  * @FilePath: /test_flutter/lib/pages/login_page.dart
@@ -135,7 +135,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: CommonButton(
                     '立即登录',
                     () {
-                      login();
+                      // login();
+                      delegate.push(name: '/base');
                     },
                     isHollow: false,
                   ),
