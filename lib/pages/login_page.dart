@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 12:40:02
- * @LastEditTime: 2021-11-19 10:54:03
+ * @LastEditTime: 2021-11-22 14:51:04
  * @LastEditors: Libra
  * @Description: 登录页面
  * @FilePath: /test_flutter/lib/pages/login_page.dart
@@ -12,10 +12,12 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter/http/core/hi_error.dart';
 import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/http/dao/validate_dao.dart';
+import 'package:test_flutter/main.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
 import 'package:test_flutter/util/toast.dart';
 import 'package:test_flutter/widget/common_button.dart';
+import 'package:test_flutter/widget/common_layout.dart';
 import 'package:test_flutter/widget/login_input.dart';
 
 class LoginPage extends StatefulWidget {
@@ -78,66 +80,71 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 40,
-        ),
-        Text("滴滴2021校园招聘在线考试", style: fs24, textAlign: TextAlign.center),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(color: shadowColor1, blurRadius: 8, spreadRadius: 0),
-            ],
-            borderRadius: BorderRadius.circular(8),
+    return CommonLayout(
+      hasLogo: true,
+      widget: Column(
+        children: [
+          SizedBox(
+            height: 40,
           ),
-          margin: EdgeInsets.all(20),
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
-                Icon(Icons.person, color: lightColor, size: 30),
+          Text("滴滴2021校园招聘在线考试", style: fs24, textAlign: TextAlign.center),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(color: shadowColor1, blurRadius: 8, spreadRadius: 0),
+              ],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            margin: EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.person, color: lightColor, size: 30),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("用户登录", style: fs18),
+                    ]),
                 SizedBox(
-                  width: 10,
+                  height: 40,
                 ),
-                Text("用户登录", style: fs18),
-              ]),
-              SizedBox(
-                height: 40,
-              ),
-              LoginInput(hintText: '请输入账号', controller: _nameController),
-              SizedBox(
-                height: 20,
-              ),
-              LoginInput(
-                  hintText: '请输入密码',
-                  obscureText: true,
-                  controller: _passwordController),
-              SizedBox(
-                height: 20,
-              ),
-              validateWidget(),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: CommonButton(
-                  '立即登录',
-                  () {
-                    login();
-                  },
-                  isHollow: false,
+                LoginInput(hintText: '请输入账号', controller: _nameController),
+                SizedBox(
+                  height: 20,
                 ),
-              )
-            ],
+                LoginInput(
+                    hintText: '请输入密码',
+                    obscureText: true,
+                    controller: _passwordController),
+                SizedBox(
+                  height: 20,
+                ),
+                validateWidget(),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: CommonButton(
+                    '立即登录',
+                    () {
+                      login();
+                    },
+                    isHollow: false,
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
