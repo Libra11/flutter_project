@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-16 14:28:42
- * @LastEditTime: 2021-11-19 09:51:00
+ * @LastEditTime: 2021-11-23 14:15:44
  * @LastEditors: Libra
  * @Description: 网络请求
  * @FilePath: /test_flutter/lib/http/core/hi_net.dart
@@ -25,7 +25,7 @@ class HiNet {
     var code = response.code;
     switch (code) {
       case 0:
-        return result;
+        return response;
       default:
         throw HiNetError(code, '出错了：$message', data: result);
     }

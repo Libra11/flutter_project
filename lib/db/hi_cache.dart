@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-17 18:36:04
- * @LastEditTime: 2021-11-17 19:15:58
+ * @LastEditTime: 2021-11-23 13:48:49
  * @LastEditors: Libra
  * @Description: shared_preferences 封装
  * @FilePath: /test_flutter/lib/db/hi_cache.dart
@@ -29,7 +29,10 @@ class HiCache {
     return _instance!;
   }
 
-  static get instance => _instance ?? HiCache._();
+  static HiCache getInstance() {
+    _instance ??= HiCache._();
+    return _instance!;
+  }
 
   void init() async {
     prefs ??= await SharedPreferences.getInstance();

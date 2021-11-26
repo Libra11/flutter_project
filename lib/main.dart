@@ -1,12 +1,14 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-15 14:00:13
- * @LastEditTime: 2021-11-22 13:17:09
+ * @LastEditTime: 2021-11-26 11:48:32
  * @LastEditors: Libra
  * @Description: 
  * @FilePath: /test_flutter/lib/main.dart
  */
 import "package:flutter/material.dart";
+import 'package:test_flutter/db/hi_cache.dart';
+import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/router/delegate.dart';
 
 MyRouterDelegate delegate = MyRouterDelegate();
@@ -14,10 +16,7 @@ MyRouterDelegate delegate = MyRouterDelegate();
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key) {
-    // 初始化时添加第一个页面
-    delegate.push(name: '/login');
-  }
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -25,8 +24,29 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<String> get jwtOrEmpty async {
+    var jwt = await LoginDao.getToken();
+    if (jwt == null) return "";
+    return jwt;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo', home: Router(routerDelegate: delegate));
+    return FutureBuilder(
+        future: jwtOrEmpty,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          if (snapshot.data == null) {
+            delegate.push(name: '/login');
+          } else {
+            delegate.push(name: '/basic');
+          }
+          return MaterialApp(
+              title: 'Flutter Demo', home: Router(routerDelegate: delegate));
+        });
   }
 }

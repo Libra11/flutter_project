@@ -1,14 +1,14 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 11:08:05
- * @LastEditTime: 2021-11-22 13:24:58
+ * @LastEditTime: 2021-11-22 17:22:15
  * @LastEditors: Libra
  * @Description: 自定义路由委托
  * @FilePath: /test_flutter/lib/router/delegate.dart
  */
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:test_flutter/pages/base_page.dart';
+import 'package:test_flutter/pages/basic_page.dart';
 import 'package:test_flutter/pages/login_page.dart';
 
 class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
@@ -33,8 +33,8 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
   MaterialPage _createPage(RouteSettings routeSettings) {
     Widget child;
     switch (routeSettings.name) {
-      case '/base':
-        child = const BasePage();
+      case '/basic':
+        child = const BasicPage();
         break;
       case '/login':
         child = const LoginPage();

@@ -3,11 +3,13 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-16 13:37:09
- * @LastEditTime: 2021-11-18 10:14:35
+ * @LastEditTime: 2021-11-22 17:11:09
  * @LastEditors: Libra
  * @Description: request 基类
  * @FilePath: /test_flutter/lib/http/request/base_request.dart
  */
+import 'package:test_flutter/http/dao/login_dao.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 // 基础请求
@@ -36,6 +38,11 @@ abstract class BaseRequest {
     uri = useHttps
         ? Uri.https(authority(), pathStr, params)
         : Uri.http(authority(), pathStr, params);
+    // 添加 headers
+    if (needLogin()) {
+      //给需要登录的接口携带登录令牌
+      addHeader(LoginDao.token, LoginDao.getToken());
+    }
     return uri.toString();
   }
 

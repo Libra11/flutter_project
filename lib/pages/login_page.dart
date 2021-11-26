@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 12:40:02
- * @LastEditTime: 2021-11-22 15:27:46
+ * @LastEditTime: 2021-11-23 15:01:12
  * @LastEditors: Libra
  * @Description: 登录页面
  * @FilePath: /test_flutter/lib/pages/login_page.dart
@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
   // 获取图片验证码
   validate() async {
     var res = await ValidateDao.validate();
+    res = res.data;
     String validateCode = res['data']['imageCode'];
     key = res['data']['key'];
     validateCode = validateCode.split(',')[1];
@@ -61,7 +62,8 @@ class _LoginPageState extends State<LoginPage> {
     var loginPassword = _passwordController.text;
     var imageCode = _imgCodeController.text;
     try {
-      var res = await LoginDao.login(imageCode, key, loginName, loginPassword);
+      await LoginDao.login(imageCode, key, loginName, loginPassword);
+      delegate.push(name: '/basic');
     } on HiNetError catch (e) {
       clear();
       ToastUtil.showToast(e.message);
@@ -135,8 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: CommonButton(
                     '立即登录',
                     () {
-                      // login();
-                      delegate.push(name: '/base');
+                      login();
                     },
                     isHollow: false,
                   ),
