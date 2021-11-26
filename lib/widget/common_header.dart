@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 15:25:16
- * @LastEditTime: 2021-11-26 16:16:33
+ * @LastEditTime: 2021-11-26 17:13:33
  * @LastEditors: Libra
  * @Description: 通用 header 组件
  * @FilePath: /test_flutter/lib/widget/common_header.dart
@@ -22,7 +22,6 @@ class CommonHeader extends StatelessWidget {
   void logOut() async {
     final storage = FlutterSecureStorage();
     await storage.delete(key: LoginDao.token);
-    print(await storage.read(key: LoginDao.token));
     delegate.push(name: '/login');
   }
 

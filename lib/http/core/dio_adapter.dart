@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-17 16:20:05
- * @LastEditTime: 2021-11-26 10:24:21
+ * @LastEditTime: 2021-11-26 17:13:16
  * @LastEditors: Libra
  * @Description: dio 适配器
  * @FilePath: /test_flutter/lib/http/core/dio_adapter.dart
@@ -9,6 +9,7 @@
 import 'package:dio/dio.dart';
 import 'package:test_flutter/http/core/hi_error.dart';
 import 'package:test_flutter/http/core/hi_net_adapter.dart';
+import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/http/request/base_request.dart';
 import 'package:test_flutter/log/log.dart';
 
@@ -17,18 +18,26 @@ class DioAdapter extends HiNetAdapter {
   Future<HiNetResponse> send(BaseRequest request) async {
     Response? response;
     var error;
+    String authorization = 'authorization';
+    var url = request.url();
+    // 添加 headers
+    if (request.needLogin()) {
+      var token = await LoginDao.getToken();
+      //给需要登录的接口携带登录令牌
+      request.addHeader(authorization, token);
+    }
     Options options = Options(headers: request.header);
     try {
       switch (request.httpMethod()) {
         case HttpMethod.GET:
-          response = await Dio().get(request.url(), options: options);
+          response = await Dio().get(url, options: options);
           break;
         case HttpMethod.POST:
-          response = await Dio()
-              .post(request.url(), data: request.params, options: options);
+          response =
+              await Dio().post(url, data: request.params, options: options);
           break;
         case HttpMethod.DELETE:
-          response = await Dio().delete(request.url(), options: options);
+          response = await Dio().delete(url, options: options);
           break;
       }
     } on DioError catch (e) {

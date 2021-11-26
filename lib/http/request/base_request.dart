@@ -3,7 +3,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-16 13:37:09
- * @LastEditTime: 2021-11-22 17:11:09
+ * @LastEditTime: 2021-11-26 17:12:15
  * @LastEditors: Libra
  * @Description: request 基类
  * @FilePath: /test_flutter/lib/http/request/base_request.dart
@@ -38,11 +38,6 @@ abstract class BaseRequest {
     uri = useHttps
         ? Uri.https(authority(), pathStr, params)
         : Uri.http(authority(), pathStr, params);
-    // 添加 headers
-    if (needLogin()) {
-      //给需要登录的接口携带登录令牌
-      addHeader(LoginDao.token, LoginDao.getToken());
-    }
     return uri.toString();
   }
 

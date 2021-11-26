@@ -1,17 +1,17 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-16 14:28:42
- * @LastEditTime: 2021-11-26 16:07:47
+ * @LastEditTime: 2021-11-26 17:02:54
  * @LastEditors: Libra
  * @Description: 网络请求
  * @FilePath: /test_flutter/lib/http/core/hi_net.dart
  */
-import 'package:flutter/material.dart';
 import 'package:test_flutter/http/core/dio_adapter.dart';
 import 'package:test_flutter/http/core/hi_error.dart';
 import 'package:test_flutter/http/core/hi_net_adapter.dart';
 import 'package:test_flutter/http/request/base_request.dart';
 import 'package:test_flutter/main.dart';
+import 'package:test_flutter/util/toast.dart';
 
 class HiNet {
   HiNet._();
@@ -31,10 +31,12 @@ class HiNet {
       // 登录失效
       case 1005:
         delegate.push(name: '/login');
+        ToastUtil.showToast('出错了：$message');
         throw NeedLoginError(code, '出错了：$message');
       // JWT 失效
       case 1032:
         delegate.push(name: '/login');
+        ToastUtil.showToast('出错了：$message');
         throw NeedLoginError(code, '出错了：$message');
       default:
         throw HiNetError(code, '出错了：$message', data: result);
