@@ -1,13 +1,12 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-15 14:00:13
- * @LastEditTime: 2021-11-26 11:48:32
+ * @LastEditTime: 2021-11-26 16:25:06
  * @LastEditors: Libra
  * @Description: 
  * @FilePath: /test_flutter/lib/main.dart
  */
 import "package:flutter/material.dart";
-import 'package:test_flutter/db/hi_cache.dart';
 import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/router/delegate.dart';
 
@@ -40,7 +39,7 @@ class _MyAppState extends State<MyApp> {
         future: jwtOrEmpty,
         builder: (context, snapshot) {
           if (!snapshot.hasData) return CircularProgressIndicator();
-          if (snapshot.data == null) {
+          if (snapshot.data == "") {
             delegate.push(name: '/login');
           } else {
             delegate.push(name: '/basic');

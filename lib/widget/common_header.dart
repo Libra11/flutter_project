@@ -1,19 +1,30 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 15:25:16
- * @LastEditTime: 2021-11-22 16:28:36
+ * @LastEditTime: 2021-11-26 16:16:33
  * @LastEditors: Libra
  * @Description: 通用 header 组件
  * @FilePath: /test_flutter/lib/widget/common_header.dart
  */
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test_flutter/http/dao/login_dao.dart';
+import 'package:test_flutter/main.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
 
 class CommonHeader extends StatelessWidget {
   // 是否正在作答
   final bool isAnswering;
+
   const CommonHeader({this.isAnswering = false, Key? key}) : super(key: key);
+
+  void logOut() async {
+    final storage = FlutterSecureStorage();
+    await storage.delete(key: LoginDao.token);
+    print(await storage.read(key: LoginDao.token));
+    delegate.push(name: '/login');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +78,17 @@ class CommonHeader extends StatelessWidget {
                     children: <Widget>[
                       Text('欢迎你，张三', style: fsw12),
                       Row(
-                        children: const <Widget>[
+                        children: <Widget>[
                           Icon(
                             Icons.logout,
                             size: 12,
                             color: Colors.white,
                           ),
                           SizedBox(width: 10),
-                          Text('退出', style: fsw12)
+                          InkWell(
+                            child: Text('退出', style: fsw12),
+                            onTap: logOut,
+                          )
                         ],
                       )
                     ],
