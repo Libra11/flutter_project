@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 11:08:05
- * @LastEditTime: 2021-11-29 15:40:57
+ * @LastEditTime: 2021-11-29 17:42:29
  * @LastEditors: Libra
  * @Description: 自定义路由委托
  * @FilePath: /test_flutter/lib/router/delegate.dart
@@ -44,6 +44,7 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
     }
     return MaterialPage(
       child: child,
+      // key: Key(routeSettings.name ?? '') as LocalKey,
       name: routeSettings.name,
       arguments: routeSettings.arguments,
     );

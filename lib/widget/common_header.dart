@@ -1,26 +1,41 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 15:25:16
- * @LastEditTime: 2021-11-29 15:55:08
+ * @LastEditTime: 2021-11-29 17:20:40
  * @LastEditors: Libra
  * @Description: 通用 header 组件
  * @FilePath: /test_flutter/lib/widget/common_header.dart
  */
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:test_flutter/http/core/hi_error.dart';
+import 'package:test_flutter/http/dao/exam_info_dao.dart';
 import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/http/dao/time_dao.dart';
 import 'package:test_flutter/main.dart';
 import 'package:test_flutter/provider/candidate_info.dart';
+import 'package:test_flutter/provider/exam_info.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
+import 'package:test_flutter/util/toast.dart';
 
-class CommonHeader extends StatelessWidget {
+class CommonHeader extends StatefulWidget {
   // 是否正在作答
   final bool isAnswering;
 
   const CommonHeader({this.isAnswering = false, Key? key}) : super(key: key);
+
+  @override
+  State<CommonHeader> createState() => _CommonHeaderState();
+}
+
+class _CommonHeaderState extends State<CommonHeader> {
+  late Timer _timer;
+
+  int _countdownTime = 0;
 
   void logOut() async {
     final storage = FlutterSecureStorage();
@@ -31,6 +46,37 @@ class CommonHeader extends StatelessWidget {
   void getTime() async {
     var time = await TimeDao.getTime();
     print(time);
+  }
+
+  void getExamInfo() async {
+    try {
+      var examInfo = await ExamInfoDao.getExamInfo();
+      Provider.of<ExamInfo>(context, listen: false).setInfo(examInfo);
+    } on HiNetError catch (e) {
+      ToastUtil.showToast(e.message);
+    }
+  }
+
+  void startCountdownTimer() {
+    const oneSec = Duration(seconds: 1);
+    callback(timer) => {
+          setState(() {
+            if (_countdownTime < 1) {
+              _timer.cancel();
+            } else {
+              _countdownTime = _countdownTime - 1;
+            }
+          })
+        };
+    _timer = Timer.periodic(oneSec, callback);
+  }
+
+  @override
+  void initState() {
+    getTime();
+    getExamInfo();
+    startCountdownTimer();
+    super.initState();
   }
 
   @override
@@ -55,14 +101,16 @@ class CommonHeader extends StatelessWidget {
               height: 60,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text(
                       '距离考试计时',
                       style: fsw12,
                     ),
-                    Text('00:00:00', style: TextStyle(color: Colors.white))
+                    Text('00:00:00', style: TextStyle(color: Colors.white)),
+                    Text(_countdownTime.toString(),
+                        style: TextStyle(color: Colors.white)),
                   ])),
-          isAnswering
+          widget.isAnswering
               ? Container(
                   padding: EdgeInsets.only(right: 10),
                   child: Row(
