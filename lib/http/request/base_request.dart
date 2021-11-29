@@ -3,13 +3,11 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-16 13:37:09
- * @LastEditTime: 2021-11-26 17:12:15
+ * @LastEditTime: 2021-11-29 10:04:02
  * @LastEditors: Libra
  * @Description: request 基类
  * @FilePath: /test_flutter/lib/http/request/base_request.dart
  */
-import 'package:test_flutter/http/dao/login_dao.dart';
-
 enum HttpMethod { GET, POST, DELETE }
 
 // 基础请求

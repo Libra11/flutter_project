@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 11:08:05
- * @LastEditTime: 2021-11-22 17:22:15
+ * @LastEditTime: 2021-11-29 15:40:57
  * @LastEditors: Libra
  * @Description: 自定义路由委托
  * @FilePath: /test_flutter/lib/router/delegate.dart
@@ -13,7 +13,7 @@ import 'package:test_flutter/pages/login_page.dart';
 
 class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
-  final List<Page> _pages = [];
+  final List<Page<dynamic>> _pages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
   }
 
   @override
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Future<void> setNewRoutePath(List<RouteSettings> configuration) async {}
@@ -42,10 +42,8 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
       default:
         child = const Scaffold();
     }
-
     return MaterialPage(
       child: child,
-      key: Key(routeSettings.name!) as LocalKey,
       name: routeSettings.name,
       arguments: routeSettings.arguments,
     );

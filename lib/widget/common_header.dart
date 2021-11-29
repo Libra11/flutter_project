@@ -1,15 +1,18 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 15:25:16
- * @LastEditTime: 2021-11-26 17:13:33
+ * @LastEditTime: 2021-11-29 15:55:08
  * @LastEditors: Libra
  * @Description: 通用 header 组件
  * @FilePath: /test_flutter/lib/widget/common_header.dart
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:provider/provider.dart';
 import 'package:test_flutter/http/dao/login_dao.dart';
+import 'package:test_flutter/http/dao/time_dao.dart';
 import 'package:test_flutter/main.dart';
+import 'package:test_flutter/provider/candidate_info.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
 
@@ -23,6 +26,11 @@ class CommonHeader extends StatelessWidget {
     final storage = FlutterSecureStorage();
     await storage.delete(key: LoginDao.token);
     delegate.push(name: '/login');
+  }
+
+  void getTime() async {
+    var time = await TimeDao.getTime();
+    print(time);
   }
 
   @override
@@ -75,7 +83,15 @@ class CommonHeader extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Text('欢迎你，张三', style: fsw12),
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                        Text('欢迎你，', style: fsw12),
+                        Consumer<CandidateInfo>(
+                          builder: (context, cart, child) {
+                            return Text(cart.info?.realName ?? '',
+                                style: fsw12);
+                          },
+                        ),
+                      ]),
                       Row(
                         children: <Widget>[
                           Icon(
@@ -85,7 +101,7 @@ class CommonHeader extends StatelessWidget {
                           ),
                           SizedBox(width: 10),
                           InkWell(
-                            child: Text('退出', style: fsw12),
+                            child: Text('退出', style: fsp12),
                             onTap: logOut,
                           )
                         ],
