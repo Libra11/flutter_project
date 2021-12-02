@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-17 16:20:05
- * @LastEditTime: 2021-11-26 17:13:16
+ * @LastEditTime: 2021-12-02 19:35:47
  * @LastEditors: Libra
  * @Description: dio 适配器
  * @FilePath: /test_flutter/lib/http/core/dio_adapter.dart
@@ -33,8 +33,11 @@ class DioAdapter extends HiNetAdapter {
           response = await Dio().get(url, options: options);
           break;
         case HttpMethod.POST:
-          response =
-              await Dio().post(url, data: request.params, options: options);
+          request.isFormData()
+              ? response = await Dio()
+                  .post(url, data: request.formData, options: options)
+              : response =
+                  await Dio().post(url, data: request.params, options: options);
           break;
         case HttpMethod.DELETE:
           response = await Dio().delete(url, options: options);

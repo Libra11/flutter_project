@@ -3,11 +3,13 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-16 13:37:09
- * @LastEditTime: 2021-11-29 10:04:02
+ * @LastEditTime: 2021-12-02 19:35:56
  * @LastEditors: Libra
  * @Description: request 基类
  * @FilePath: /test_flutter/lib/http/request/base_request.dart
  */
+import 'package:test_flutter/log/log.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 // 基础请求
@@ -36,11 +38,26 @@ abstract class BaseRequest {
     uri = useHttps
         ? Uri.https(authority(), pathStr, params)
         : Uri.http(authority(), pathStr, params);
+    if (isFormData()) {
+      uri = Uri.https(
+          'stone-exam-test.oss-accelerate.aliyuncs.com', pathStr, params);
+    }
     return uri.toString();
   }
 
   // 是否需要登录
   bool needLogin();
+
+  // 是否是 FormData
+  bool isFormData() {
+    return false;
+  }
+
+  var formData;
+  BaseRequest setFormData(var formData) {
+    this.formData = formData;
+    return this;
+  }
 
   Map<String, dynamic> params = {};
   // 设置参数

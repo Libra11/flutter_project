@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 11:08:05
- * @LastEditTime: 2021-11-29 17:42:29
+ * @LastEditTime: 2021-12-02 10:21:02
  * @LastEditors: Libra
  * @Description: 自定义路由委托
  * @FilePath: /test_flutter/lib/router/delegate.dart
@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:test_flutter/pages/basic_page.dart';
 import 'package:test_flutter/pages/login_page.dart';
+import 'package:test_flutter/pages/test_page.dart';
 
 class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -38,6 +39,9 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
         break;
       case '/login':
         child = const LoginPage();
+        break;
+      case '/test':
+        child = const TestPage();
         break;
       default:
         child = const Scaffold();
