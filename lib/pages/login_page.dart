@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 12:40:02
- * @LastEditTime: 2021-12-02 10:06:00
+ * @LastEditTime: 2021-12-03 13:53:11
  * @LastEditors: Libra
  * @Description: 登录页面
  * @FilePath: /test_flutter/lib/pages/login_page.dart
@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 40,
             ),
-            Text("滴滴2021校园招聘在线考试", style: fs24, textAlign: TextAlign.center),
+            Text("国考云2021校园招聘在线考试", style: fs24, textAlign: TextAlign.center),
             SizedBox(
               height: 20,
             ),

@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 15:25:16
- * @LastEditTime: 2021-12-03 11:21:33
+ * @LastEditTime: 2021-12-03 14:06:14
  * @LastEditors: Libra
  * @Description: 通用 header 组件
  * @FilePath: /test_flutter/lib/widget/common_header.dart
@@ -11,18 +11,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:test_flutter/http/core/hi_error.dart';
-import 'package:test_flutter/http/dao/exam/exam_info_dao.dart';
-import 'package:test_flutter/http/dao/exam/job_info_dao.dart';
 import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/http/dao/time_dao.dart';
 import 'package:test_flutter/main.dart';
 import 'package:test_flutter/provider/candidate_info.dart';
-import 'package:test_flutter/provider/exam_info.dart';
-import 'package:test_flutter/provider/job_info.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
-import 'package:test_flutter/util/toast.dart';
 
 class CommonHeader extends StatefulWidget {
   // 是否正在作答
@@ -50,24 +44,6 @@ class _CommonHeaderState extends State<CommonHeader> {
     print(time);
   }
 
-  void getExamInfo() async {
-    try {
-      var examInfo = await ExamInfoDao.getExamInfo();
-      Provider.of<ExamInfo>(context, listen: false).setInfo(examInfo);
-    } on HiNetError catch (e) {
-      ToastUtil.showToast(e.message);
-    }
-  }
-
-  void getJobInfo() async {
-    try {
-      var jobInfo = await JobInfoDao.getJobInfo();
-      Provider.of<JobInfo>(context, listen: false).setInfo(jobInfo);
-    } on HiNetError catch (e) {
-      ToastUtil.showToast(e.message);
-    }
-  }
-
   void startCountdownTimer() {
     const oneSec = Duration(seconds: 1);
     callback(timer) => {
@@ -85,8 +61,6 @@ class _CommonHeaderState extends State<CommonHeader> {
   @override
   void initState() {
     getTime();
-    getExamInfo();
-    getJobInfo();
     startCountdownTimer();
     super.initState();
   }
