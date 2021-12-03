@@ -164,36 +164,36 @@ class ExamInfoModel {
 }
 
 class CandidateInfo {
-  bool? isRealNameRequired;
-  bool? isRealNameEditable;
-  bool? isMobileRequired;
-  bool? isMobileEditable;
-  bool? isEmailRequired;
-  bool? isEmailEditable;
-  bool? isUniversityRequired;
-  bool? isUniversityEditable;
-  bool? isDegreeRequired;
-  bool? isDegreeEditable;
-  bool? isMajorRequired;
-  bool? isMajorEditable;
-  bool? isIdCardNumRequired;
-  bool? isIdCardNumEditable;
+  bool isRealNameRequired = false;
+  bool isRealNameEditable = false;
+  bool isMobileRequired = false;
+  bool isMobileEditable = false;
+  bool isEmailRequired = false;
+  bool isEmailEditable = false;
+  bool isUniversityRequired = false;
+  bool isUniversityEditable = false;
+  bool isDegreeRequired = false;
+  bool isDegreeEditable = false;
+  bool isMajorRequired = false;
+  bool isMajorEditable = false;
+  bool isIdCardNumRequired = false;
+  bool isIdCardNumEditable = false;
 
   CandidateInfo(
-      {this.isRealNameRequired,
-      this.isRealNameEditable,
-      this.isMobileRequired,
-      this.isMobileEditable,
-      this.isEmailRequired,
-      this.isEmailEditable,
-      this.isUniversityRequired,
-      this.isUniversityEditable,
-      this.isDegreeRequired,
-      this.isDegreeEditable,
-      this.isMajorRequired,
-      this.isMajorEditable,
-      this.isIdCardNumRequired,
-      this.isIdCardNumEditable});
+      {this.isRealNameRequired = false,
+      this.isRealNameEditable = false,
+      this.isMobileRequired = false,
+      this.isMobileEditable = false,
+      this.isEmailRequired = false,
+      this.isEmailEditable = false,
+      this.isUniversityRequired = false,
+      this.isUniversityEditable = false,
+      this.isDegreeRequired = false,
+      this.isDegreeEditable = false,
+      this.isMajorRequired = false,
+      this.isMajorEditable = false,
+      this.isIdCardNumRequired = false,
+      this.isIdCardNumEditable = false});
 
   CandidateInfo.fromJson(Map<String, dynamic> json) {
     isRealNameRequired = json['isRealNameRequired'];
