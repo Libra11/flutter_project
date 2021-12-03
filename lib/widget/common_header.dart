@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 15:25:16
- * @LastEditTime: 2021-11-29 17:20:40
+ * @LastEditTime: 2021-12-03 11:21:33
  * @LastEditors: Libra
  * @Description: 通用 header 组件
  * @FilePath: /test_flutter/lib/widget/common_header.dart
@@ -12,12 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:test_flutter/http/core/hi_error.dart';
-import 'package:test_flutter/http/dao/exam_info_dao.dart';
+import 'package:test_flutter/http/dao/exam/exam_info_dao.dart';
+import 'package:test_flutter/http/dao/exam/job_info_dao.dart';
 import 'package:test_flutter/http/dao/login_dao.dart';
 import 'package:test_flutter/http/dao/time_dao.dart';
 import 'package:test_flutter/main.dart';
 import 'package:test_flutter/provider/candidate_info.dart';
 import 'package:test_flutter/provider/exam_info.dart';
+import 'package:test_flutter/provider/job_info.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
 import 'package:test_flutter/util/toast.dart';
@@ -57,6 +59,15 @@ class _CommonHeaderState extends State<CommonHeader> {
     }
   }
 
+  void getJobInfo() async {
+    try {
+      var jobInfo = await JobInfoDao.getJobInfo();
+      Provider.of<JobInfo>(context, listen: false).setInfo(jobInfo);
+    } on HiNetError catch (e) {
+      ToastUtil.showToast(e.message);
+    }
+  }
+
   void startCountdownTimer() {
     const oneSec = Duration(seconds: 1);
     callback(timer) => {
@@ -75,6 +86,7 @@ class _CommonHeaderState extends State<CommonHeader> {
   void initState() {
     getTime();
     getExamInfo();
+    getJobInfo();
     startCountdownTimer();
     super.initState();
   }
@@ -101,14 +113,12 @@ class _CommonHeaderState extends State<CommonHeader> {
               height: 60,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       '距离考试计时',
                       style: fsw12,
                     ),
-                    Text('00:00:00', style: TextStyle(color: Colors.white)),
-                    Text(_countdownTime.toString(),
-                        style: TextStyle(color: Colors.white)),
+                    Text('00:00:00', style: TextStyle(color: Colors.white))
                   ])),
           widget.isAnswering
               ? Container(

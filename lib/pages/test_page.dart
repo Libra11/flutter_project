@@ -1,13 +1,12 @@
 /*
  * @Author: Libra
  * @Date: 2021-12-02 10:14:42
- * @LastEditTime: 2021-12-02 19:36:42
+ * @LastEditTime: 2021-12-03 13:39:01
  * @LastEditors: Libra
  * @Description: 
  * @FilePath: /test_flutter/lib/pages/test_page.dart
  */
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -20,7 +19,7 @@ import 'package:test_flutter/log/log.dart';
 import 'package:test_flutter/provider/candidate_info.dart';
 import 'package:test_flutter/provider/exam_info.dart';
 import 'package:test_flutter/util/toast.dart';
-import 'package:test_flutter/widget/common_layout.dart';
+// import 'package:wakelock/wakelock.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({Key? key}) : super(key: key);
@@ -50,12 +49,14 @@ class _TestPageState extends State<TestPage> {
 
   @override
   void initState() {
+    // Wakelock.enable();
     super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
+    // Wakelock.disable();
     super.dispose();
   }
 
@@ -132,30 +133,27 @@ class _TestPageState extends State<TestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CommonLayout(
-      hasLogo: true,
-      widget: FutureBuilder<void>(
-        future: init(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Column(children: <Widget>[
-              controller.value.isInitialized
-                  ? SizedBox(height: 400, child: CameraPreview(controller))
-                  : Container(),
-              TextButton(
-                onPressed: recordVideoEverySecond,
-                child: Text('开始录制'),
-              ),
-              TextButton(
-                onPressed: getToken,
-                child: Text('获取token'),
-              )
-            ]);
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
+    return FutureBuilder<void>(
+      future: init(),
+      builder: (context, snapshot) {
+        final scale = 1 /
+            (controller.value.aspectRatio *
+                MediaQuery.of(context).size.aspectRatio);
+        recordVideoEverySecond();
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Column(children: <Widget>[
+            controller.value.isInitialized
+                ? Transform.scale(
+                    scale: scale,
+                    alignment: Alignment.topCenter,
+                    child: CameraPreview(controller),
+                  )
+                : Container(),
+          ]);
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
