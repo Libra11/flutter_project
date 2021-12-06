@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 15:25:16
- * @LastEditTime: 2021-12-03 14:06:14
+ * @LastEditTime: 2021-12-06 12:01:29
  * @LastEditors: Libra
  * @Description: 通用 header 组件
  * @FilePath: /test_flutter/lib/widget/common_header.dart
@@ -11,7 +11,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:test_flutter/http/dao/login_dao.dart';
+import 'package:test_flutter/http/dao/candidate/login_dao.dart';
 import 'package:test_flutter/http/dao/time_dao.dart';
 import 'package:test_flutter/main.dart';
 import 'package:test_flutter/provider/candidate_info.dart';

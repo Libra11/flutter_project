@@ -1,14 +1,14 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-15 14:00:13
- * @LastEditTime: 2021-12-03 13:45:10
+ * @LastEditTime: 2021-12-06 12:01:41
  * @LastEditors: Libra
  * @Description: 
  * @FilePath: /test_flutter/lib/main.dart
  */
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
-import 'package:test_flutter/http/dao/login_dao.dart';
+import 'package:test_flutter/http/dao/candidate/login_dao.dart';
 import 'package:test_flutter/provider/candidate_info.dart';
 import 'package:test_flutter/provider/exam_info.dart';
 import 'package:test_flutter/provider/job_info.dart';
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             if (snapshot.data == "") {
               delegate.push(name: '/login');
             } else {
-              delegate.push(name: '/basic');
+              delegate.push(name: '/select');
             }
             return MaterialApp(
                 title: 'Flutter Demo', home: Router(routerDelegate: delegate));

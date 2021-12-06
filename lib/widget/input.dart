@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-12-03 16:21:25
- * @LastEditTime: 2021-12-03 16:54:31
+ * @LastEditTime: 2021-12-06 11:51:44
  * @LastEditors: Libra
  * @Description: 
  * @FilePath: /test_flutter/lib/widget/input.dart
@@ -13,13 +13,15 @@ class Input extends StatefulWidget {
   final String? labelText;
   final String? hintText;
   final String? Function(String?)? validator;
+  final String? Function(String?)? onChanged;
   final TextEditingController? controller;
   const Input(
       {Key? key,
       this.controller,
       this.labelText,
       this.hintText,
-      this.validator})
+      this.validator,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -78,6 +80,7 @@ class _InputState extends State<Input> {
         ),
         // 校验用户名
         validator: widget.validator,
+        onChanged: widget.onChanged,
       ),
     );
   }

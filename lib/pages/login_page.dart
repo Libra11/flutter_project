@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 12:40:02
- * @LastEditTime: 2021-12-03 13:53:11
+ * @LastEditTime: 2021-12-06 12:01:23
  * @LastEditors: Libra
  * @Description: 登录页面
  * @FilePath: /test_flutter/lib/pages/login_page.dart
@@ -10,8 +10,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:test_flutter/http/core/hi_error.dart';
-import 'package:test_flutter/http/dao/login_dao.dart';
-import 'package:test_flutter/http/dao/validate_dao.dart';
+import 'package:test_flutter/http/dao/candidate/login_dao.dart';
+import 'package:test_flutter/http/dao/candidate/validate_dao.dart';
 import 'package:test_flutter/main.dart';
 import 'package:test_flutter/util/color.dart';
 import 'package:test_flutter/util/font.dart';
@@ -84,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return CommonLayout(
       hasLogo: true,
+      isLogin: false,
       widget: SingleChildScrollView(
         child: Column(
           children: [

@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 15:22:44
- * @LastEditTime: 2021-11-18 16:22:41
+ * @LastEditTime: 2021-12-06 11:37:25
  * @LastEditors: Libra
  * @Description: 通用按钮组件
  * @FilePath: /test_flutter/lib/widget/common_button.dart
@@ -25,7 +25,10 @@ class CommonButton extends StatelessWidget {
         ? OutlinedButton(
             child: Text(text),
             onPressed: onPressed,
-            style: OutlinedButton.styleFrom(primary: primary),
+            style: OutlinedButton.styleFrom(
+              primary: redColor,
+              side: BorderSide(width: 1.0, color: redColor),
+            ),
           )
         : ElevatedButton(
             child: Text(text),

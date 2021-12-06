@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-17 16:20:05
- * @LastEditTime: 2021-12-03 11:44:52
+ * @LastEditTime: 2021-12-06 12:01:51
  * @LastEditors: Libra
  * @Description: dio 适配器
  * @FilePath: /test_flutter/lib/http/core/dio_adapter.dart
@@ -9,7 +9,7 @@
 import 'package:dio/dio.dart';
 import 'package:test_flutter/http/core/hi_error.dart';
 import 'package:test_flutter/http/core/hi_net_adapter.dart';
-import 'package:test_flutter/http/dao/login_dao.dart';
+import 'package:test_flutter/http/dao/candidate/login_dao.dart';
 import 'package:test_flutter/http/request/base_request.dart';
 import 'package:test_flutter/log/log.dart';
 
