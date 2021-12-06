@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 11:26:35
- * @LastEditTime: 2021-12-06 12:54:31
+ * @LastEditTime: 2021-12-06 17:40:48
  * @LastEditors: Libra
  * @Description: 基本信息页面
  * @FilePath: /test_flutter/lib/pages/basic_page.dart
@@ -11,6 +11,7 @@ import 'package:test_flutter/http/core/hi_error.dart';
 import 'package:test_flutter/http/dao/candidate/candidate_info_dao.dart';
 import 'package:test_flutter/http/dao/candidate/update_candidate_info_dao.dart';
 import 'package:test_flutter/http/dao/exam/exam_info_dao.dart';
+import 'package:test_flutter/main.dart';
 import 'package:test_flutter/util/font.dart';
 import 'package:test_flutter/util/toast.dart';
 import 'package:test_flutter/widget/common_button.dart';
@@ -168,6 +169,7 @@ class _BasicPageState extends State<BasicPage> {
     try {
       await UpdateCandidateInfoDao.updateCandidateInfo(
           degree, idCardNum, major, realName, mobile, university, email);
+      delegate.push(name: '/camera');
     } on HiNetError catch (e) {
       ToastUtil.showToast(e.message);
     }
@@ -201,6 +203,7 @@ class _BasicPageState extends State<BasicPage> {
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: snapshot.data,
                     ),
+                    SizedBox(height: 20),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       width: double.infinity,
@@ -208,7 +211,11 @@ class _BasicPageState extends State<BasicPage> {
                         '保存并下一步',
                         updateCandidateInfo,
                         isHollow: true,
+                        height: 40,
                       ),
+                    ),
+                    SizedBox(
+                      height: 100,
                     )
                   ]),
                 );

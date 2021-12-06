@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-17 16:20:05
- * @LastEditTime: 2021-12-06 12:01:51
+ * @LastEditTime: 2021-12-06 19:07:31
  * @LastEditors: Libra
  * @Description: dio 适配器
  * @FilePath: /test_flutter/lib/http/core/dio_adapter.dart
@@ -53,12 +53,21 @@ class DioAdapter extends HiNetAdapter {
       throw HiNetError(response?.data["code"], error.toString(),
           data: await buildRes(response));
     }
+    if (request.isFormData()) {
+      // TODO 上传文件这里没有处理
+      response = null;
+    }
     return buildRes(response);
   }
 
   ///构建HiNetResponse
   Future<HiNetResponse> buildRes(Response? response) {
-    return Future.value(HiNetResponse(response?.data["code"],
-        data: response?.data, msg: response?.data["message"]));
+    if (response == null) {
+      // // TODO 还有这里
+      return Future.value(HiNetResponse(0));
+    } else {
+      return Future.value(HiNetResponse(response.data["code"],
+          data: response.data, msg: response.data["message"]));
+    }
   }
 }

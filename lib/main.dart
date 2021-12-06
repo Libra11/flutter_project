@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-15 14:00:13
- * @LastEditTime: 2021-12-06 12:01:41
+ * @LastEditTime: 2021-12-06 14:43:01
  * @LastEditors: Libra
  * @Description: 
  * @FilePath: /test_flutter/lib/main.dart
@@ -15,7 +15,6 @@ import 'package:test_flutter/provider/job_info.dart';
 import 'package:test_flutter/router/delegate.dart';
 
 MyRouterDelegate delegate = MyRouterDelegate();
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {

@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 11:08:05
- * @LastEditTime: 2021-12-06 11:17:10
+ * @LastEditTime: 2021-12-06 19:09:06
  * @LastEditors: Libra
  * @Description: 自定义路由委托
  * @FilePath: /test_flutter/lib/router/delegate.dart
@@ -9,7 +9,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:test_flutter/pages/basic_page.dart';
+import 'package:test_flutter/pages/camera_page.dart';
 import 'package:test_flutter/pages/login_page.dart';
+import 'package:test_flutter/pages/notice_page.dart';
 import 'package:test_flutter/pages/select_page.dart';
 import 'package:test_flutter/pages/test_page.dart';
 
@@ -47,12 +49,18 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
       case '/select':
         child = const SelectPage();
         break;
+      case '/camera':
+        child = const CameraPage();
+        break;
+      case '/notice':
+        child = const NoticePage();
+        break;
       default:
         child = const Scaffold();
     }
     return MaterialPage(
       child: child,
-      // key: Key(routeSettings.name ?? '') as LocalKey,
+      key: Key(routeSettings.name ?? '') as LocalKey,
       name: routeSettings.name,
       arguments: routeSettings.arguments,
     );
@@ -60,6 +68,11 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
 
   /// 压入新页面显示
   void push({required String name, dynamic arguments}) {
+    // 判断当前 _pages 是否已经存在该页面, 如果存在，将页面移动到数组最后一位
+    if (_pages.any((page) => page.name == name)) {
+      _pages.removeWhere((page) => page.name == name);
+      // return;
+    }
     _pages.add(_createPage(RouteSettings(name: name, arguments: arguments)));
     // 通知路由栈，我们的Page列表已经修改了
     notifyListeners();
