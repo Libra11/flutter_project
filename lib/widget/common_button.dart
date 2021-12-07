@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-18 15:22:44
- * @LastEditTime: 2021-12-06 16:11:58
+ * @LastEditTime: 2021-12-07 10:24:43
  * @LastEditors: Libra
  * @Description: 通用按钮组件
  * @FilePath: /test_flutter/lib/widget/common_button.dart
@@ -11,7 +11,7 @@ import 'package:test_flutter/util/color.dart';
 
 class CommonButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final onPressed;
   // 是否是空心
   final bool isHollow;
   final double? height;

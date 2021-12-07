@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-22 11:08:05
- * @LastEditTime: 2021-12-06 19:09:06
+ * @LastEditTime: 2021-12-07 10:56:42
  * @LastEditors: Libra
  * @Description: 自定义路由委托
  * @FilePath: /test_flutter/lib/router/delegate.dart
@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:test_flutter/pages/basic_page.dart';
 import 'package:test_flutter/pages/camera_page.dart';
+import 'package:test_flutter/pages/exam_page.dart';
 import 'package:test_flutter/pages/login_page.dart';
 import 'package:test_flutter/pages/notice_page.dart';
 import 'package:test_flutter/pages/select_page.dart';
@@ -54,6 +55,9 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
         break;
       case '/notice':
         child = const NoticePage();
+        break;
+      case '/exam':
+        child = const ExamPage();
         break;
       default:
         child = const Scaffold();
