@@ -1,7 +1,7 @@
 /*
  * @Author: Libra
  * @Date: 2021-11-15 14:00:13
- * @LastEditTime: 2021-12-07 10:58:09
+ * @LastEditTime: 2021-12-07 18:42:45
  * @LastEditors: Libra
  * @Description: 
  * @FilePath: /test_flutter/lib/main.dart
@@ -48,12 +48,12 @@ class _MyAppState extends State<MyApp> {
           future: jwtOrEmpty,
           builder: (context, snapshot) {
             if (!snapshot.hasData) return CircularProgressIndicator();
-            // if (snapshot.data == "") {
-            //   delegate.push(name: '/login');
-            // } else {
-            //   delegate.push(name: '/select');
-            // }
-            delegate.push(name: '/exam');
+            if (snapshot.data == "") {
+              delegate.push(name: '/login');
+            } else {
+              delegate.push(name: '/select');
+            }
+            // delegate.push(name: '/exam');
             return MaterialApp(
                 title: 'Flutter Demo', home: Router(routerDelegate: delegate));
           }),
